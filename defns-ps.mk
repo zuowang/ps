@@ -39,7 +39,8 @@ PETUUM_CXXFLAGS = -O3 \
            -fno-builtin-calloc \
            -fno-builtin-realloc \
            -fno-builtin-free \
-           -fno-omit-frame-pointer
+           -fno-omit-frame-pointer \
+	   -fPIC
 
 PETUUM_INCFLAGS = -I$(PETUUM_SRC) -I$(PETUUM_THIRD_PARTY_INCLUDE)
 PETUUM_INCFLAGS += $(HDFS_INCFLAGS)
