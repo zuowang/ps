@@ -50,7 +50,6 @@ PETUUM_LDFLAGS = -Wl,-rpath,$(PETUUM_THIRD_PARTY_LIB) \
           -lzmq \
           -lboost_thread \
           -lboost_system \
-          -lglog \
           -lgflags \
           -ltcmalloc \
           -lconfig++ \
