@@ -28,15 +28,18 @@ PS_SN_LIB = $(LIB)/libpetuum-ps-sn.a
 
 ML_LIB = $(LIB)/libpetuum-ml.a
 
-ps_lib: $(PS_LIB)
+ps_lib: $(PS_LIB) $(LIB)/libpetuum-ps.so
 
 $(PS_LIB): $(PS_OBJ) $(PS_COMMON_OBJ) path
 	ar csrv $@ $(PS_OBJ) $(PS_COMMON_OBJ)
 
+$(LIB)/libpetuum-ps.so: $(PS_OBJ) $(PS_COMMON_OBJ) path
+	$(CXX) $(CXXFLAGS) -shared -o $@ $(PS_OBJ) $(PS_COMMON_OBJ)
+ 
 $(PS_OBJ): %.o: %.cpp $(PS_HEADERS) $(PS_COMMON_HEADERS)
 	$(CXX) $(CXXFLAGS) $(INCFLAGS) -c $< -o $@
 
-ps_sn_lib: $(PS_SN_LIB)
+ps_sn_lib: $(PS_SN_LIB) 
 
 $(PS_SN_LIB): $(PS_SN_OBJ) $(PS_COMMON_OBJ) path
 	ar csrv $@ $(PS_SN_OBJ) $(PS_COMMON_OBJ)
@@ -47,10 +50,13 @@ $(PS_SN_OBJ): %.o: %.cpp $(PS_SN_HEADERS) $(PS_COMMON_HEADERS)
 $(PS_COMMON_OBJ): %.o: %.cpp $(PS_COMMON_HEADERS)
 	$(CXX) $(CXXFLAGS) $(INCFLAGS) -c $< -o $@
 
-ml_lib: $(ML_LIB)
+ml_lib: $(ML_LIB) $(LIB)/libpetuum-ml.so
 
 $(ML_LIB): $(ML_OBJ) path
 	ar csrv $@ $(ML_OBJ)
+
+$(LIB)/libpetuum-ml.so: $(ML_OBJ)
+	$(CXX) $(CXXFLAGS) -shared -o $@ $(ML_OBJ)
 
 $(ML_OBJ): %.o: %.cpp $(ML_HEADERS)
 	$(CXX) $(CXXFLAGS) $(INCFLAGS) -c $< -o $@
