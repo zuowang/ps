@@ -31,7 +31,7 @@ PETUUM_THIRD_PARTY_LIB = $(PETUUM_THIRD_PARTY)/lib
 PETUUM_THIRD_PARTY_BIN = $(PETUUM_THIRD_PARTY)/bin
 
 PETUUM_CXX = g++
-PETUUM_CXXFLAGS = -O3 \
+PETUUM_CXXFLAGS = -g -O0 \
            -std=c++11 \
            -Wall \
 					 -Wno-sign-compare \
@@ -40,7 +40,9 @@ PETUUM_CXXFLAGS = -O3 \
            -fno-builtin-realloc \
            -fno-builtin-free \
            -fno-omit-frame-pointer \
-	   -fPIC
+           -fPIC \
+           -fsanitize=address \
+           -fno-omit-frame-pointer
 
 PETUUM_INCFLAGS = -I$(PETUUM_SRC) -I$(PETUUM_THIRD_PARTY_INCLUDE)
 PETUUM_INCFLAGS += $(HDFS_INCFLAGS)
